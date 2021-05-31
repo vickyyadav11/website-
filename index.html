@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+
+    <title>websites</title>
+  </head>
+
+  <body>
+    <!---Header section-->
+    <div class="header">
+      <a href="#default" class="logo">Code Academy</a>
+      <div class="header-right">
+        <a class="active" href="#home">Home</a>
+        <a href="#Recent">Recent</a>
+        <a href="#news">News</a>
+        <a href="#about us">About us</a>
+        <a href="#sign in">Sign in</a>
+      </div>
+    </div>
+    <div id="nobel_countries"></div>
+
+    <!---Section showing a embedded youtube video.-->
+    <iframe
+      width="1520"
+      height="800"
+      src="https://www.youtube.com/embed/F4Zu5ZZAG7I"
+      title="YouTube video player"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+    ></iframe>
+
+    <!--footer section-->
+    <footer>
+      <p>Copyrights reserved 2021</p>
+    </footer>
+    <script>
+      function myFunction() {
+        var x = document.getElementById('myTopnav');
+        if (x.className === 'topnav') {
+          x.className += ' responsive';
+        } else {
+          x.className = 'topnav';
+        }
+      }
+      // create a request object
+      var request = new XMLHttpRequest();
+
+      //open the request
+      request.open('GET', 'http://api.nobelprize.org/v1/country.json', true);
+
+      //send the request
+      request.send();
+
+      //load the response
+      request.onload = function () {
+        var respData = JSON.parse(this.response);
+        const data = respData.countries;
+        for (let i = 0; i < 10; i++) {
+          const p = document.createElement('p');
+          p.innerHTML = data[i].name;
+          p.classList.add('listitems');
+          document.getElementById('nobel_countries').appendChild(p);
+        }
+      };
+    </script>
+  </body>
+</html>
