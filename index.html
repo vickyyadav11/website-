@@ -1,36 +1,77 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <title></title>
-    <link href="style.css" type="text/css" rel="stylesheet" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+
+    <title>websites</title>
   </head>
 
   <body>
+    <!---Header section-->
     <div class="header">
-      <img src="photo.jpg" />
-      <h1>Vicky Yadav</h1>
-      <p class="about-me">
-        I am a developer specializing in HTML5, CSS3, Bootstrap5, Javascript. I
-        like to code everyday, see movies, and make more friends.
-      </p>
+      <a href="#default" class="logo">Code Academy</a>
+      <div class="header-right">
+        <a class="active" href="#home">Home</a>
+        <a href="#Recent">Recent</a>
+        <a href="#news">News</a>
+        <a href="#about us">About us</a>
+        <a href="#sign in">Sign in</a>
+      </div>
     </div>
+    <div id="nobel_countries"></div>
 
-    <h2>Projects</h2>
-    <p class="title">Web Development projects</p>
-    <ul>
-      <li>fashion Blog</li>
-      <li>Survey form</li>
-      <li>Bootstrap Projects</li>
-      <li>HTML & CSS</li>
-    </ul>
+    <!---Section showing a embedded youtube video.-->
+    <iframe
+      width="1520"
+      height="800"
+      src="https://www.youtube.com/embed/F4Zu5ZZAG7I"
+      title="YouTube video player"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+    ></iframe>
 
-    <p class="title">Internship projects</p>
-    <ul>
-      <li>Zuari Tech</li>
-    </ul>
-    <h2>Contact</h2>
-    <p>Find me on Twitter, Linkdin, and GitHub.</p>
+    <!--footer section-->
+    <footer>
+      <p>Copyrights reserved 2021</p>
+    </footer>
+    <script>
+      function myFunction() {
+        var x = document.getElementById('myTopnav');
+        if (x.className === 'topnav') {
+          x.className += ' responsive';
+        } else {
+          x.className = 'topnav';
+        }
+      }
+      // create a request object
+      var request = new XMLHttpRequest();
 
-    <h6>&copy; Copyright. All Rights Reserved.</h6>
+      //open the request
+      request.open('GET', 'http://api.nobelprize.org/v1/country.json', true);
+
+      //send the request
+      request.send();
+
+      //load the response
+      request.onload = function () {
+        var respData = JSON.parse(this.response);
+        const data = respData.countries;
+        for (let i = 0; i < 10; i++) {
+          const p = document.createElement('p');
+          p.innerHTML = data[i].name;
+          p.classList.add('listitems');
+          document.getElementById('nobel_countries').appendChild(p);
+        }
+      };
+    </script>
   </body>
 </html>
